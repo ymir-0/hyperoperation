@@ -3,7 +3,7 @@ import os
 
 import setuptools
 
-module_path = os.path.join(os.path.dirname(__file__), 'hyperoperation/hyperoperation.py')
+module_path = os.path.join(os.path.dirname(__file__), 'hyperoperation/testHyperoperation.py')
 version_line = [line for line in open(module_path)
                 if line.startswith('__version__')][0]
 
