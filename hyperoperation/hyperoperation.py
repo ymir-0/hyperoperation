@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
 __version__ = '0.0.0'
-print("If you can read this message, Python3 works fine")
-print("This test application version is : " + __version__)
+def subAddition(a,b):
+    result=None
+    if a==b:
+        result=2+a
+    else:
+        result=max(a,b)+1
+    return result
