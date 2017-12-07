@@ -15,17 +15,23 @@ class testHyperoperation(unittest.TestCase):
     def testRedifinedAddition(self):
         for repertedNumber in range(0,10):
             for repertingNumber in range(0, 10):
+                # compare with addition
                 expectedAddition=repertedNumber+repertingNumber
-                actualAddition=redifinedAddition(repertedNumber,repertingNumber)
-                self.assertEqual(expectedAddition,actualAddition,str(repertedNumber)+"+"+str(repertingNumber))
+                actualRedifinedAddition=redifinedAddition(repertedNumber,repertingNumber)
+                self.assertEqual(expectedAddition,actualRedifinedAddition,"redifined addition value : "+str(repertedNumber) + " / " + str(repertingNumber))
+                # check commutativity
+                commutatedRedifinedAddition=redifinedAddition(repertingNumber,repertedNumber)
+                self.assertEqual(actualRedifinedAddition, commutatedRedifinedAddition, "redifined addition commutativity : "+str(repertedNumber) + " / " + str(repertingNumber))
     # test smooth
     def testJump(self):
         for number in range(1, 10):
+            # check jump
             smoothValue=subAddition(number,number-1)
             roughValue=subAddition(number,number-1,Jump.rough)
-            associatedRoughValue=subAddition(number,number-1,Jump.rough)
             self.assertEqual(smoothValue, roughValue+1, "Jump rough/smooth : "+str(smoothValue) + "+" + str(roughValue))
-            self.assertEqual(roughValue, associatedRoughValue, "Jump associated : " + str(roughValue) + "+" + str(associatedRoughValue))
+            # check commutativity
+            commutatedRoughValue=subAddition(number,number-1,Jump.rough)
+            self.assertEqual(roughValue, commutatedRoughValue, "Jump commutativity : " + str(roughValue) + " / " + str(commutatedRoughValue))
 # run test
 if __name__ == '__main__':
     unittest.main()
