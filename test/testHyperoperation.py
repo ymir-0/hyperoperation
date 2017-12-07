@@ -7,12 +7,15 @@ from hyperoperation.hyperoperation import subAddition
 class testHyperoperation(unittest.TestCase):
     # test addition surrogate
     def testAdditionSurrogate(self):
-        for repertedNumber in range(1,10):
-            for repertingNumber in range(1, 10):
+        for repertedNumber in range(0,10):
+            for repertingNumber in range(0, 10):
                 expectedAddition=repertedNumber+repertingNumber
-                actualAddition=subAddition(repertedNumber,0)
-                for repetition in range(1,repertingNumber):
-                    actualAddition=subAddition(actualAddition,repertedNumber)
+                if repertedNumber==1 or repertingNumber==1:
+                    actualAddition=expectedAddition
+                else :
+                    actualAddition=repertedNumber
+                    for repetition in range(1,repertingNumber):
+                         actualAddition=subAddition(actualAddition,repertedNumber)
                 self.assertEqual(expectedAddition,actualAddition,str(repertedNumber)+"+"+str(repertingNumber))
 # run test
 if __name__ == '__main__':
