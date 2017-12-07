@@ -14,7 +14,7 @@ class testHyperoperation(unittest.TestCase):
     # test redifined surrogate
     def testRedifinedAddition(self):
         for number0 in range(0,10):
-            for number1 in range(0, 10):
+            for number1 in range(number0, 10):
                 # compare with addition
                 expectedAddition=number0+number1
                 actualRedifinedAddition=redifinedAddition(number0,number1)
