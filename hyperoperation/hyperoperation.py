@@ -11,16 +11,16 @@ TODO :
  - define for decimal numbers
  - define for negative numbers
 '''
-def subAddition(a,b,jump=Jump.smooth):
+def subAddition(number0,number1,jump=Jump.smooth):
     # initiation
     result=None
     # do defined operation
-    if a==b:
-        result=2+a
-    elif jump.value or (not jump.value and abs(a-b)>1):
-        result = max(a, b) + 1
+    if number0==number1:
+        result=2+number0
+    elif jump.value or (not jump.value and abs(number0-number1)>1):
+        result = max(number0, number1) + 1
     else:
-        result=max(a,b)
+        result=max(number0,number1)
     # finalisation
     return result
 def redifinedAddition(repertedNumber,repertingNumber,jump=Jump.smooth):

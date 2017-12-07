@@ -13,15 +13,15 @@ TODO :
 class testHyperoperation(unittest.TestCase):
     # test redifined surrogate
     def testRedifinedAddition(self):
-        for repertedNumber in range(0,10):
-            for repertingNumber in range(0, 10):
+        for number0 in range(0,10):
+            for number1 in range(0, 10):
                 # compare with addition
-                expectedAddition=repertedNumber+repertingNumber
-                actualRedifinedAddition=redifinedAddition(repertedNumber,repertingNumber)
-                self.assertEqual(expectedAddition,actualRedifinedAddition,"redifined addition value : "+str(repertedNumber) + " / " + str(repertingNumber))
+                expectedAddition=number0+number1
+                actualRedifinedAddition=redifinedAddition(number0,number1)
+                self.assertEqual(expectedAddition,actualRedifinedAddition,"redifined addition value : "+str(number0) + " / " + str(number1))
                 # check commutativity
-                commutatedRedifinedAddition=redifinedAddition(repertingNumber,repertedNumber)
-                self.assertEqual(actualRedifinedAddition, commutatedRedifinedAddition, "redifined addition commutativity : "+str(repertedNumber) + " / " + str(repertingNumber))
+                commutatedRedifinedAddition=redifinedAddition(number1,number0)
+                self.assertEqual(actualRedifinedAddition, commutatedRedifinedAddition, "redifined addition commutativity : "+str(number0) + " / " + str(number1))
     # test smooth
     def testJump(self):
         for number in range(1, 10):
