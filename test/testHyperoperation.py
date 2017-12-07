@@ -11,27 +11,38 @@ TODO :
  - test associativity
 '''
 class testHyperoperation(unittest.TestCase):
-    # test redifined surrogate
-    def testRedifinedAddition(self):
+    # test redifined addition (& commutativity)
+    def testSubAddition(self):
         for number0 in range(0,10):
+            # sub addition jump rough/smooth
+            result0=subAddition(number0=number0,number1=number0-1)
+            result1=subAddition(jump=Jump.rough,number0=number0,number1=number0-1)
+            self.assertEqual(result0, result1+1, "sub addition jump rough/smooth : "+str(number0))
+            # sub addition jump commutativity
+            result2=subAddition(jump=Jump.rough,number0=number0-1,number1=number0)
+            self.assertEqual(result1, result2, "sub addition jump commutativity : " + str(number0))
             for number1 in range(number0, 10):
-                # compare with addition
-                expectedAddition=number0+number1
-                actualRedifinedAddition=redifinedAddition(number0,number1)
-                self.assertEqual(expectedAddition,actualRedifinedAddition,"redifined addition value : "+str(number0) + " / " + str(number1))
-                # check commutativity
-                commutatedRedifinedAddition=redifinedAddition(number1,number0)
-                self.assertEqual(actualRedifinedAddition, commutatedRedifinedAddition, "redifined addition commutativity : "+str(number0) + " / " + str(number1))
-    # test smooth
-    def testJump(self):
-        for number in range(1, 10):
-            # check jump
-            smoothValue=subAddition(number,number-1)
-            roughValue=subAddition(number,number-1,Jump.rough)
-            self.assertEqual(smoothValue, roughValue+1, "Jump rough/smooth : "+str(smoothValue) + "+" + str(roughValue))
-            # check commutativity
-            commutatedRoughValue=subAddition(number,number-1,Jump.rough)
-            self.assertEqual(roughValue, commutatedRoughValue, "Jump commutativity : " + str(roughValue) + " / " + str(commutatedRoughValue))
+                # redifined addition value
+                result0=number0+number1
+                result1=redifinedAddition(number0,number1)
+                self.assertEqual(result0,result1,"redifined addition value : "+str((number0,number1)))
+                # redifined addition commutativity
+                result2=redifinedAddition(number1,number0)
+                self.assertEqual(result1, result2, "redifined addition commutativity : "+str((number0,number1)))
+                # sub addition commutativity
+                result0=subAddition(number0=number0,number1=number1)
+                result1=subAddition(number0=number1,number1=number0)
+                self.assertEqual(result0, result1, "sub addition commutativity : "+str((number0,number1)))
+                # sub addition flexibility
+                result0 = subAddition(number0=subAddition(number0=number0, number1=number1), number1=number0)
+                result1 = subAddition(number0=number0, number1=subAddition(number0=number1, number1=number0))
+                self.assertEqual(result0, result1, "sub addition flexibility : "+str((number0,number1)))
+                ''' CONTINUE WITH Moufang loop
+                for number2 in range(number1, 10):
+                    pass
+                '''
+    # end of class
+    pass
 # run test
 if __name__ == '__main__':
     unittest.main()

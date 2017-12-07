@@ -11,7 +11,7 @@ TODO :
  - define for decimal numbers
  - define for negative numbers
 '''
-def subAddition(number0,number1,jump=Jump.smooth):
+def subAddition(jump=Jump.smooth,*extraNumbers,number0,number1):
     # initiation
     result=None
     # do defined operation
@@ -21,6 +21,12 @@ def subAddition(number0,number1,jump=Jump.smooth):
         result = max(number0, number1) + 1
     else:
         result=max(number0,number1)
+    # continue with extra parameters
+    if len(extraNumbers)>0:
+        if len(extraNumbers) == 1:
+            result=subAddition(jump,number0=result,number1=extraNumbers[0])
+        else:
+            result=subAddition(jump,extraNumbers[1:],number0=result,number1=extraNumbers[0])
     # finalisation
     return result
 def redifinedAddition(repertedNumber,repertingNumber,jump=Jump.smooth):
@@ -33,6 +39,6 @@ def redifinedAddition(repertedNumber,repertingNumber,jump=Jump.smooth):
     else:
         result = repertedNumber
         for repetition in range(1, repertingNumber):
-            result = subAddition(result, repertedNumber,jump)
+            result = subAddition(jump=jump,number0=result,number1=repertedNumber)
     # finalisation
     return result
