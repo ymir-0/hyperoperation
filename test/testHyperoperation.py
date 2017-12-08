@@ -16,18 +16,15 @@ class testHyperoperation(unittest.TestCase):
             result3 = subAddition((number0, number0,number0, number0))
             self.assertTrue(result0 == result1 == result2 == result3, "power associativity : " + str(number0))
             for number1 in range(number0, loopLimit):
-                # redifined addition value
+                # redifined addition value : x + y
                 result0=number0+number1
-                result1=redifinedAddition(number0,number1)
+                result1=redifinedAddition((number0,number1))
                 self.assertEqual(result0,result1,"redifined addition value : "+str((number0,number1)))
-                # redifined addition commutativity
-                result2=redifinedAddition(number1,number0)
-                self.assertEqual(result1, result2, "redifined addition commutativity : "+str((number0,number1)))
-                # sub addition commutativity
+                # sub addition commutativity : xy = yx
                 result0=subAddition((number0,number1))
                 result1=subAddition((number1,number0))
                 self.assertEqual(result0, result1, "sub addition commutativity : "+str((number0,number1)))
-                # sub addition flexibility
+                # sub addition flexibility : (xy)x = x(yx)
                 result0 = subAddition((subAddition((number0, number1)), number0))
                 result1 = subAddition((number0, subAddition((number1, number0))))
                 result2 = subAddition((number0, number1, number0))

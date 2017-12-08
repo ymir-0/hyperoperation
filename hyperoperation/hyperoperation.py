@@ -20,19 +20,22 @@ def subAddition(numbers):
         result = subAddition(tuple([result] + list(numbers[2:])))
     # finalisation
     return result
-def redifinedAddition(repertedNumber,repertingNumber):
+def redifinedAddition(numbers):
     # initiation
     result=None
     # the sub addition is strangely defined for adding 1
-    if repertedNumber == 1 or repertingNumber == 1:
-        number = repertingNumber
-        if repertingNumber == 1 :
-            number=repertedNumber
+    if numbers[0] == 1 or numbers[1] == 1:
+        number = numbers[1]
+        if numbers[1] == 1 :
+            number=numbers[0]
         result = subAddition((number,number+1))
     # otherwise, addition can be described with sub addition
     else:
-        result = repertedNumber
-        for repetition in range(1, repertingNumber):
-            result = subAddition((result,repertedNumber))
+        result = numbers[0]
+        for repetition in range(1, numbers[1]):
+            result = subAddition((result,numbers[0]))
+    # continue with extra parameters
+    if len(numbers)>2:
+        result = redifinedAddition(tuple([result] + list(numbers[2:])))
     # finalisation
     return result
