@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 # PY test script file name must start with "test" to allow automatic recognition by PyCharm
 # import
-import unittest
+import unittest, sys
 from hyperoperation.hyperoperation import subAddition,redifinedAddition
+loopLimit=100
 # define test
 class testHyperoperation(unittest.TestCase):
     # test redifined addition (& commutativity)
     def testSubAddition(self):
-        for number0 in range(0,10):
-            for number1 in range(number0, 10):
+        for number0 in range(0,loopLimit):
+            for number1 in range(number0, loopLimit):
                 # redifined addition value
                 result0=number0+number1
                 result1=redifinedAddition(number0,number1)
@@ -25,10 +26,6 @@ class testHyperoperation(unittest.TestCase):
                 result1 = subAddition(number0, subAddition(number1, number0))
                 result2 = subAddition(number0, number1, number0)
                 self.assertTrue(result0==result1==result2, "sub addition flexibility : "+str((number0,number1)))
-                ''' CONTINUE WITH Moufang loop
-                for number2 in range(number1, 10):
-                    pass
-                '''
     # end of class
     pass
 # run test
