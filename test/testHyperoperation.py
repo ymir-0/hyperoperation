@@ -2,25 +2,12 @@
 # PY test script file name must start with "test" to allow automatic recognition by PyCharm
 # import
 import unittest
-from hyperoperation.hyperoperation import subAddition,redifinedAddition,Jump
+from hyperoperation.hyperoperation import subAddition,redifinedAddition
 # define test
-'''
-TODO :
- - test bump
- - test symetry
- - test associativity
-'''
 class testHyperoperation(unittest.TestCase):
     # test redifined addition (& commutativity)
     def testSubAddition(self):
         for number0 in range(0,10):
-            # sub addition jump rough/smooth
-            result0=subAddition(number0=number0,number1=number0-1)
-            result1=subAddition(jump=Jump.rough,number0=number0,number1=number0-1)
-            self.assertEqual(result0, result1+1, "sub addition jump rough/smooth : "+str(number0))
-            # sub addition jump commutativity
-            result2=subAddition(jump=Jump.rough,number0=number0-1,number1=number0)
-            self.assertEqual(result1, result2, "sub addition jump commutativity : " + str(number0))
             for number1 in range(number0, 10):
                 # redifined addition value
                 result0=number0+number1
