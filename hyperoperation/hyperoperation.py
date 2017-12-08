@@ -32,9 +32,12 @@ def subAddition(jump=Jump.smooth,*extraNumbers,number0,number1):
 def redifinedAddition(repertedNumber,repertingNumber,jump=Jump.smooth):
     # initiation
     result=None
-    # the sub addition is not defined for adding 1
+    # the sub addition is strangely defined for adding 1
     if repertedNumber == 1 or repertingNumber == 1:
-        result = repertedNumber+repertingNumber
+        number = repertingNumber
+        if repertingNumber == 1 :
+            number=repertedNumber
+        result = subAddition(jump=Jump.rough,number0=number,number1=number+1)
     # otherwise, addition can be descripted with sub addition
     else:
         result = repertedNumber
