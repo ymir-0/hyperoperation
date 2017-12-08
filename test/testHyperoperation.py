@@ -17,13 +17,14 @@ class testHyperoperation(unittest.TestCase):
                 result2=redifinedAddition(number1,number0)
                 self.assertEqual(result1, result2, "redifined addition commutativity : "+str((number0,number1)))
                 # sub addition commutativity
-                result0=subAddition(number0=number0,number1=number1)
-                result1=subAddition(number0=number1,number1=number0)
+                result0=subAddition(number0,number1)
+                result1=subAddition(number1,number0)
                 self.assertEqual(result0, result1, "sub addition commutativity : "+str((number0,number1)))
                 # sub addition flexibility
-                result0 = subAddition(number0=subAddition(number0=number0, number1=number1), number1=number0)
-                result1 = subAddition(number0=number0, number1=subAddition(number0=number1, number1=number0))
-                self.assertEqual(result0, result1, "sub addition flexibility : "+str((number0,number1)))
+                result0 = subAddition(subAddition(number0, number1), number0)
+                result1 = subAddition(number0, subAddition(number1, number0))
+                result2 = subAddition(number0, number1, number0)
+                self.assertTrue(result0==result1==result2, "sub addition flexibility : "+str((number0,number1)))
                 ''' CONTINUE WITH Moufang loop
                 for number2 in range(number1, 10):
                     pass

@@ -19,9 +19,9 @@ def subAddition(number0,number1,*extraNumbers):
     # continue with extra parameters
     if len(extraNumbers)>0:
         if len(extraNumbers) == 1:
-            result=subAddition(number0=result,number1=extraNumbers[0])
+            result=subAddition(result,extraNumbers[0])
         else:
-            result=subAddition(number0=result,number1=extraNumbers[0],extraNumbers=extraNumbers[1:])
+            result=subAddition(result,extraNumbers[0],extraNumbers[1:])
     # finalisation
     return result
 def redifinedAddition(repertedNumber,repertingNumber):
@@ -32,11 +32,11 @@ def redifinedAddition(repertedNumber,repertingNumber):
         number = repertingNumber
         if repertingNumber == 1 :
             number=repertedNumber
-        result = subAddition(number0=number,number1=number+1)
+        result = subAddition(number,number+1)
     # otherwise, addition can be described with sub addition
     else:
         result = repertedNumber
         for repetition in range(1, repertingNumber):
-            result = subAddition(number0=result,number1=repertedNumber)
+            result = subAddition(result,repertedNumber)
     # finalisation
     return result
