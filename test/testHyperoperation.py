@@ -9,6 +9,12 @@ class testHyperoperation(unittest.TestCase):
     # test redifined addition (& commutativity)
     def testSubAddition(self):
         for number0 in range(0,loopLimit):
+            # power associativity : x(x(xx)) = (x(xx))x = (xx)(xx)
+            result0 = subAddition(number0,subAddition(number0,subAddition(number0, number0)))
+            result1 = subAddition(subAddition(number0,subAddition(number0, number0)), number0)
+            result2 = subAddition(subAddition(number0, number0),subAddition(number0, number0))
+            result3 = subAddition(number0, number0,number0, number0)
+            self.assertTrue(result0 == result1 == result2 == result3, "power associativity : " + str(number0))
             for number1 in range(number0, loopLimit):
                 # redifined addition value
                 result0=number0+number1

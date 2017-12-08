@@ -18,10 +18,8 @@ def subAddition(number0,number1,*extraNumbers):
         result=max(number0,number1)
     # continue with extra parameters
     if len(extraNumbers)>0:
-        if len(extraNumbers) == 1:
-            result=subAddition(result,extraNumbers[0])
-        else:
-            result=subAddition(result,extraNumbers[0],extraNumbers[1:])
+        for extraNumber in extraNumbers:
+            result = subAddition(result, extraNumber)
     # finalisation
     return result
 def redifinedAddition(repertedNumber,repertingNumber):
