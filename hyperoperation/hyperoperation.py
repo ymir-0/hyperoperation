@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
 __version__ = '0.0.0'
 '''
-TODO :
- - define reverse operation
- - define for decimal numbers
- - define for negative numbers
+TODO : test if
+ - input is iterable : https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
+ - then check at least 2 values
 '''
-def subAddition(number0,number1,*extraNumbers):
+def subAddition(numbers):
     # initiation
     result=None
     # do defined operation
-    if number0==number1:
-        result=2+number0
-    elif abs(number0-number1)>1:
-        result = max(number0, number1) + 1
+    if numbers[0]==numbers[1]:
+        result=2+numbers[0]
+    elif abs(numbers[0]-numbers[1])>1:
+        result = max(numbers[0], numbers[1]) + 1
     else:
-        result=max(number0,number1)
+        result=max(numbers[0],numbers[1])
     # continue with extra parameters
-    if len(extraNumbers)>0:
-        for extraNumber in extraNumbers:
-            result = subAddition(result, extraNumber)
+    if len(numbers)>2:
+        result = subAddition(tuple([result] + list(numbers[2:])))
     # finalisation
     return result
 def redifinedAddition(repertedNumber,repertingNumber):
@@ -30,11 +28,11 @@ def redifinedAddition(repertedNumber,repertingNumber):
         number = repertingNumber
         if repertingNumber == 1 :
             number=repertedNumber
-        result = subAddition(number,number+1)
+        result = subAddition((number,number+1))
     # otherwise, addition can be described with sub addition
     else:
         result = repertedNumber
         for repetition in range(1, repertingNumber):
-            result = subAddition(result,repertedNumber)
+            result = subAddition((result,repertedNumber))
     # finalisation
     return result

@@ -10,10 +10,10 @@ class testHyperoperation(unittest.TestCase):
     def testSubAddition(self):
         for number0 in range(0,loopLimit):
             # power associativity : x(x(xx)) = (x(xx))x = (xx)(xx)
-            result0 = subAddition(number0,subAddition(number0,subAddition(number0, number0)))
-            result1 = subAddition(subAddition(number0,subAddition(number0, number0)), number0)
-            result2 = subAddition(subAddition(number0, number0),subAddition(number0, number0))
-            result3 = subAddition(number0, number0,number0, number0)
+            result0 = subAddition((number0,subAddition((number0,subAddition((number0, number0))))))
+            result1 = subAddition((subAddition((number0, subAddition((number0, number0)))), number0))
+            result2 = subAddition((subAddition((number0, number0)),subAddition((number0, number0))))
+            result3 = subAddition((number0, number0,number0, number0))
             self.assertTrue(result0 == result1 == result2 == result3, "power associativity : " + str(number0))
             for number1 in range(number0, loopLimit):
                 # redifined addition value
@@ -24,13 +24,13 @@ class testHyperoperation(unittest.TestCase):
                 result2=redifinedAddition(number1,number0)
                 self.assertEqual(result1, result2, "redifined addition commutativity : "+str((number0,number1)))
                 # sub addition commutativity
-                result0=subAddition(number0,number1)
-                result1=subAddition(number1,number0)
+                result0=subAddition((number0,number1))
+                result1=subAddition((number1,number0))
                 self.assertEqual(result0, result1, "sub addition commutativity : "+str((number0,number1)))
                 # sub addition flexibility
-                result0 = subAddition(subAddition(number0, number1), number0)
-                result1 = subAddition(number0, subAddition(number1, number0))
-                result2 = subAddition(number0, number1, number0)
+                result0 = subAddition((subAddition((number0, number1)), number0))
+                result1 = subAddition((number0, subAddition((number1, number0))))
+                result2 = subAddition((number0, number1, number0))
                 self.assertTrue(result0==result1==result2, "sub addition flexibility : "+str((number0,number1)))
     # end of class
     pass
