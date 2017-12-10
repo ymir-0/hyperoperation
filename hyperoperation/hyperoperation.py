@@ -49,10 +49,10 @@ def solveSubAddition(knownValue,result):
     elif result==2+knownValue:
         solution=knownValue
     elif result==knownValue+1:
-        solution=result
+        solution={result,range(-maxsize,knownValue-1)}
     elif result == knownValue:
         solution = knownValue-1
-    elif result>knownValue+1:
+    else:
         solution=result-1
     # finalisation
     return solution
