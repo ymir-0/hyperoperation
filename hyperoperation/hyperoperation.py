@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 __version__ = '0.0.0'
-'''
-TODO : test if
- - input is iterable : https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
- - then check at least 2 values
-'''
+from sys import maxsize
+# TODO : test if
+''' - input is iterable : https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
+ - then check at least 2 values'''
 def subAddition(numbers):
     # initiation
     result=None
@@ -39,3 +38,21 @@ def redifinedAddition(numbers):
         result = redifinedAddition(tuple([result] + list(numbers[2:])))
     # finalisation
     return result
+# TODO : test if result > knownValue + 1
+def solveSubAddition(knownValue,result):
+    # initiation
+    solution=None
+    # check consistency
+    if result < knownValue:
+        pass
+    # solving
+    elif result==2+knownValue:
+        solution=knownValue
+    elif result==knownValue+1:
+        solution=result
+    elif result == knownValue:
+        solution = knownValue-1
+    elif result>knownValue+1:
+        solution=result-1
+    # finalisation
+    return solution

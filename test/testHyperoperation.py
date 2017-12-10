@@ -2,7 +2,8 @@
 # PY test script file name must start with "test" to allow automatic recognition by PyCharm
 # import
 import unittest
-from hyperoperation.hyperoperation import subAddition,redifinedAddition
+from hyperoperation.hyperoperation import subAddition,redifinedAddition,solveSubAddition
+from sys import maxsize
 loopLimit=100
 # define test
 class testHyperoperation(unittest.TestCase):
@@ -19,11 +20,21 @@ class testHyperoperation(unittest.TestCase):
                 result0=subAddition((number0,number1))
                 result1=subAddition((number1,number0))
                 self.assertEqual(result0, result1, "sub addition commutativity : "+str((number0,number1)))
+                subAdditionResult=result0
                 # sub addition flexibility : (xy)x = x(yx)
                 result0 = subAddition((subAddition((number0, number1)), number0))
                 result1 = subAddition((number0, subAddition((number1, number0))))
                 result2 = subAddition((number0, number1, number0))
                 self.assertTrue(result0==result1==result2, "sub addition flexibility : (xy)x = x(yx) = xyx : "+str((number0,number1)))
+                # test solving
+                solution=solveSubAddition(number0,subAdditionResult)
+                self.assertEqual(subAddition((number0, solution)), subAdditionResult, "solving issue : a µ x = b : "+str((number0,subAdditionResult)))
+                self.assertNotEqual(subAddition((number0, solution-1)), subAdditionResult, "solving issue : a µ x-1 != b : "+str((number0,subAdditionResult)))
+                self.assertNotEqual(subAddition((number0, solution+1)), subAdditionResult, "solving issue : a µ x+1 != b : "+str((number0,subAdditionResult)))
+                solution = solveSubAddition(number1,subAdditionResult)
+                self.assertEqual(subAddition((number1, solution)), subAdditionResult, "solving issue : a µ x = b : "+str((number1,subAdditionResult)))
+                self.assertNotEqual(subAddition((number1, solution-1)), subAdditionResult, "solving issue : a µ x-1 != b : "+str((number1,subAdditionResult)))
+                self.assertNotEqual(subAddition((number1, solution+1)), subAdditionResult, "solving issue : a µ x+1 != b : "+str((number1,subAdditionResult)))
         # not verified properties
         self.assertNotEqual(subAddition((subAddition((0, 0)),1)),subAddition((0, subAddition((0, 1)))), "not left alternative : (xx)y = x(xy) ; x=0 ; y=1")
         self.assertNotEqual(subAddition((1,subAddition((0, 0)))),subAddition((subAddition((1, 0)),0)), "not right alternative : y(xx) = (yx)x ; x=0 ; y=1")
