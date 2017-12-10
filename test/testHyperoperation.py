@@ -25,27 +25,48 @@ class testHyperoperation(unittest.TestCase):
                 result0 = subAddition((subAddition((number0, number1)), number0))
                 result1 = subAddition((number0, subAddition((number1, number0))))
                 result2 = subAddition((number0, number1, number0))
-                self.assertTrue(result0==result1==result2, "sub addition flexibility : (xy)x = x(yx) = xyx : "+str((number0,number1)))
+                self.assertTrue(result0==result1==result2, "sub addition flexibility : (xy)x == x(yx) == xyx : (x,y)="+str((number0,number1)))
                 # test solving
-                solution=solveSubAddition(number0,subAdditionResult)
-                self.assertEqual(subAddition((number0, solution)), subAdditionResult, "solving issue : a µ x = b : "+str((number0,subAdditionResult)))
-                self.assertNotEqual(subAddition((number0, solution-1)), subAdditionResult, "solving issue : a µ x-1 != b : "+str((number0,subAdditionResult)))
-                self.assertNotEqual(subAddition((number0, solution+1)), subAdditionResult, "solving issue : a µ x+1 != b : "+str((number0,subAdditionResult)))
-                solution = solveSubAddition(number1,subAdditionResult)
-                self.assertEqual(subAddition((number1, solution)), subAdditionResult, "solving issue : a µ x = b : "+str((number1,subAdditionResult)))
-                self.assertNotEqual(subAddition((number1, solution-1)), subAdditionResult, "solving issue : a µ x-1 != b : "+str((number1,subAdditionResult)))
-                self.assertNotEqual(subAddition((number1, solution+1)), subAdditionResult, "solving issue : a µ x+1 != b : "+str((number1,subAdditionResult)))
+                self.testSubAdditionSolving(number0, subAdditionResult)
+                self.testSubAdditionSolving(number1, subAdditionResult)
         # not verified properties
-        self.assertNotEqual(subAddition((subAddition((0, 0)),1)),subAddition((0, subAddition((0, 1)))), "not left alternative : (xx)y = x(xy) ; x=0 ; y=1")
-        self.assertNotEqual(subAddition((1,subAddition((0, 0)))),subAddition((subAddition((1, 0)),0)), "not right alternative : y(xx) = (yx)x ; x=0 ; y=1")
-        '''self.assertNotEqual(subAddition((1, subAddition((0, subAddition((1, 0)))))),subAddition((subAddition((subAddition((1, 0)),1)),0)), "not moufang #0 : z(x(zy)) = ((zx)z)y ; x=0=y=0 ; z=1")
-        self.assertNotEqual(subAddition((0, subAddition((1, subAddition((0, 1)))))),subAddition((subAddition((subAddition((0, 1)),0)),1)), "not moufang #1 : x(z(yz)) = ((xz)y)z ; x=0=y=0 ; z=1")
-        self.assertFalse(subAddition((subAddition((1, 0)),subAddition((0, 1))))==subAddition((subAddition((1, subAddition((0, 0)))),1))==subAddition((1,subAddition((subAddition((0, 0)),1)))), "not moufang #2 : (zx)(yz) = (z(xy))z = z((xy)z) ; x=0=y=0 ; z=1")'''
-        self.assertNotEqual(subAddition((0, subAddition((0, subAddition((0, 1)))))),subAddition((subAddition((0, subAddition((0, 0)))),1)), "left bol : x(y(xz)) = (x(yx))z ; x=0=y=0 ; z=1")
-        self.assertNotEqual(subAddition((subAddition((subAddition((1, 0)),0)),0)),subAddition((subAddition((1, subAddition((0, 0)))),0)), "right bol : ((zx)y)x = z((xy)x) ; x=0=y=0 ; z=1")
+        self.assertNotEqual(subAddition((subAddition((0, 0)),1)),subAddition((0, subAddition((0, 1)))), "not left alternative : (xx)y == x(xy) ; x=0 ; y=1")
+        self.assertNotEqual(subAddition((1,subAddition((0, 0)))),subAddition((subAddition((1, 0)),0)), "not right alternative : y(xx) == (yx)x ; x=0 ; y=1")
+        '''self.assertNotEqual(subAddition((1, subAddition((0, subAddition((1, 0)))))),subAddition((subAddition((subAddition((1, 0)),1)),0)), "not moufang #0 : z(x(zy)) == ((zx)z)y ; x=0=y=0 ; z=1")
+        self.assertNotEqual(subAddition((0, subAddition((1, subAddition((0, 1)))))),subAddition((subAddition((subAddition((0, 1)),0)),1)), "not moufang #1 : x(z(yz)) == ((xz)y)z ; x=0=y=0 ; z=1")
+        self.assertFalse(subAddition((subAddition((1, 0)),subAddition((0, 1))))==subAddition((subAddition((1, subAddition((0, 0)))),1))==subAddition((1,subAddition((subAddition((0, 0)),1)))), "not moufang #2 : (zx)(yz) == (z(xy))z == z((xy)z) ; x=0=y=0 ; z=1")'''
+        self.assertNotEqual(subAddition((0, subAddition((0, subAddition((0, 1)))))),subAddition((subAddition((0, subAddition((0, 0)))),1)), "left bol : x(y(xz)) == (x(yx))z ; x=0=y=0 ; z=1")
+        self.assertNotEqual(subAddition((subAddition((subAddition((1, 0)),0)),0)),subAddition((subAddition((1, subAddition((0, 0)))),0)), "right bol : ((zx)y)x == z((xy)x) ; x=0=y=0 ; z=1")
+        pass
+    # test sub addition solving
+    def testSubAdditionSolving(self,knownValue,result):
+        solutions = solveSubAddition(knownValue, result)
+        self.checkSolveSubAdditionResults(solutions,knownValue, result)
+    def checkSolveSubAdditionResults(self,solutions,knownValue, result):
+        # if solution is a set, check is element
+        if type(solutions)==set and result in solutions:
+            for solution in solutions:
+                self.checkSolveSubAdditionResults(solution, knownValue, result)
+        # else check result
+        else:
+            # assume solution is a number
+            limitSolution = solutions
+            # if solution is a range, check inferior value is valid
+            if type(solutions)==range:
+                limitSolution = solutions[-1]
+                self.assertEqual(subAddition((knownValue, limitSolution - 1)), result,"solving issue : a(x-1) == b : (a,b)=" + str((knownValue, result)))
+            # if solution is number, check inferior value is invalid
+            else:
+                self.assertNotEqual(subAddition((knownValue, limitSolution - 1)), result,"solving issue : a(x-1) != b : (a,b)=" + str((knownValue, result)))
+            # check limit and superior values are valid
+            self.assertEqual(subAddition((knownValue, limitSolution)), result,"solving issue : ax = b : " + str((knownValue, result)))
+            self.assertNotEqual(subAddition((knownValue, limitSolution + 1)), result,"solving issue : a(x+1) != b : (a,b)=" + str((knownValue, result)))
+            pass
         pass
     # end of class
     pass
+#
+pass
 # run test
 if __name__ == '__main__':
     unittest.main()
