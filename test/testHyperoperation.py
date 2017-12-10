@@ -3,7 +3,6 @@
 # import
 import unittest
 from hyperoperation.hyperoperation import subAddition,redifinedAddition,solveSubAddition
-from sys import maxsize
 loopLimit=100
 # define test
 class testHyperoperation(unittest.TestCase):
@@ -32,9 +31,6 @@ class testHyperoperation(unittest.TestCase):
         # not verified properties
         self.assertNotEqual(subAddition((subAddition((0, 0)),1)),subAddition((0, subAddition((0, 1)))), "not left alternative : (xx)y == x(xy) ; x=0 ; y=1")
         self.assertNotEqual(subAddition((1,subAddition((0, 0)))),subAddition((subAddition((1, 0)),0)), "not right alternative : y(xx) == (yx)x ; x=0 ; y=1")
-        '''self.assertNotEqual(subAddition((1, subAddition((0, subAddition((1, 0)))))),subAddition((subAddition((subAddition((1, 0)),1)),0)), "not moufang #0 : z(x(zy)) == ((zx)z)y ; x=0=y=0 ; z=1")
-        self.assertNotEqual(subAddition((0, subAddition((1, subAddition((0, 1)))))),subAddition((subAddition((subAddition((0, 1)),0)),1)), "not moufang #1 : x(z(yz)) == ((xz)y)z ; x=0=y=0 ; z=1")
-        self.assertFalse(subAddition((subAddition((1, 0)),subAddition((0, 1))))==subAddition((subAddition((1, subAddition((0, 0)))),1))==subAddition((1,subAddition((subAddition((0, 0)),1)))), "not moufang #2 : (zx)(yz) == (z(xy))z == z((xy)z) ; x=0=y=0 ; z=1")'''
         self.assertNotEqual(subAddition((0, subAddition((0, subAddition((0, 1)))))),subAddition((subAddition((0, subAddition((0, 0)))),1)), "left bol : x(y(xz)) == (x(yx))z ; x=0=y=0 ; z=1")
         self.assertNotEqual(subAddition((subAddition((subAddition((1, 0)),0)),0)),subAddition((subAddition((1, subAddition((0, 0)))),0)), "right bol : ((zx)y)x == z((xy)x) ; x=0=y=0 ; z=1")
         pass
@@ -61,12 +57,6 @@ class testHyperoperation(unittest.TestCase):
             # check limit and superior values are valid
             self.assertEqual(subAddition((knownValue, limitSolution)), result,"solving issue : ax = b : " + str((knownValue, result)))
             self.assertNotEqual(subAddition((knownValue, limitSolution + 1)), result,"solving issue : a(x+1) != b : (a,b)=" + str((knownValue, result)))
-            pass
-        pass
-    # end of class
-    pass
-#
-pass
 # run test
 if __name__ == '__main__':
     unittest.main()
