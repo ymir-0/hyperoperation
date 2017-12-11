@@ -20,11 +20,6 @@ class testHyperoperation(unittest.TestCase):
                 result1=subAddition((number1,number0))
                 self.assertEqual(result0, result1, "sub addition commutativity : "+str((number0,number1)))
                 subAdditionResult=result0
-                # sub addition flexibility : (xy)x = x(yx)
-                result0 = subAddition((subAddition((number0, number1)), number0))
-                result1 = subAddition((number0, subAddition((number1, number0))))
-                result2 = subAddition((number0, number1, number0))
-                self.assertTrue(result0==result1==result2, "sub addition flexibility : (xy)x == x(yx) == xyx : (x,y)="+str((number0,number1)))
                 # test solving
                 self.testSubAdditionSolving(number0, subAdditionResult)
                 self.testSubAdditionSolving(number1, subAdditionResult)
