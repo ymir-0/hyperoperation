@@ -28,7 +28,6 @@ class testHyperoperation(unittest.TestCase):
         self.assertNotEqual(subAddition((1,subAddition((0, 0)))),subAddition((subAddition((1, 0)),0)), "not right alternative : y(xx) == (yx)x ; x=0 ; y=1")
         self.assertNotEqual(subAddition((0, subAddition((0, subAddition((0, 1)))))),subAddition((subAddition((0, subAddition((0, 0)))),1)), "left bol : x(y(xz)) == (x(yx))z ; x=0=y=0 ; z=1")
         self.assertNotEqual(subAddition((subAddition((subAddition((1, 0)),0)),0)),subAddition((subAddition((1, subAddition((0, 0)))),0)), "right bol : ((zx)y)x == z((xy)x) ; x=0=y=0 ; z=1")
-        pass
     # test sub addition solving
     def testSubAdditionSolving(self,knownValue,result):
         solutions = solveSubAddition(knownValue, result)
