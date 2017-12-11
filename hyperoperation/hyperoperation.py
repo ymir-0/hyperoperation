@@ -31,7 +31,7 @@ def redifinedAddition(numbers):
     # otherwise, addition can be described with sub addition
     else:
         result = numbers[0]
-        for repetition in range(1, numbers[1]):
+        for repetition in range(1, abs(numbers[1])):
             result = subAddition((result,numbers[0]))
     # continue with extra parameters
     if len(numbers)>2:
