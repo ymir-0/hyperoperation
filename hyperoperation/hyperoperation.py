@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 __version__ = '0.0.0'
 from sys import maxsize
-# TODO : test if
+# TODO : test if (input is NOT iterable & do NOT contains 2 elements at least) : raise error
+# TODO : test for negative values
+# TODO : test for decimal values
+# TODO : define recursive sub-sub-...-addition
+# TODO : implement over exponentiation
 ''' - input is iterable : https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
  - then check at least 2 values'''
 def subAddition(numbers):
@@ -31,14 +35,14 @@ def redifinedAddition(numbers):
     # otherwise, addition can be described with sub addition
     else:
         result = numbers[0]
-        for repetition in range(1, abs(numbers[1])):
+        for repetition in range(1, numbers[1]):
             result = subAddition((result,numbers[0]))
     # continue with extra parameters
     if len(numbers)>2:
         result = redifinedAddition(tuple([result] + list(numbers[2:])))
     # finalisation
     return result
-# TODO : test if result > knownValue + 1
+# TODO : test if result > knownValue + 1 : raise error
 def solveSubAddition(knownValue,result):
     # initiation
     solution=None

@@ -44,13 +44,13 @@ class testHyperoperation(unittest.TestCase):
             # if solution is a range, check inferior value is valid
             if type(solutions)==range:
                 limitSolution = solutions[-1]
-                self.assertEqual(subAddition((knownValue, limitSolution - 1)), result,"solving issue : a(x-1) == b : (a,b)=" + str((knownValue, result)))
+                self.assertEqual(result,subAddition((knownValue, limitSolution - 1)), "solving issue : a(x-1) == b : (a,b)=" + str((knownValue, result)))
             # if solution is number, check inferior value is invalid
             else:
-                self.assertNotEqual(subAddition((knownValue, limitSolution - 1)), result,"solving issue : a(x-1) != b : (a,b)=" + str((knownValue, result)))
+                self.assertNotEqual(result,subAddition((knownValue, limitSolution - 1)), "solving issue : a(x-1) != b : (a,b)=" + str((knownValue, result)))
             # check limit and superior values are valid
-            self.assertEqual(subAddition((knownValue, limitSolution)), result,"solving issue : ax = b : " + str((knownValue, result)))
-            self.assertNotEqual(subAddition((knownValue, limitSolution + 1)), result,"solving issue : a(x+1) != b : (a,b)=" + str((knownValue, result)))
+            self.assertEqual(result,subAddition((knownValue, limitSolution)), "solving issue : ax = b : " + str((knownValue, result)))
+            self.assertNotEqual(result,subAddition((knownValue, limitSolution + 1)), "solving issue : a(x+1) != b : (a,b)=" + str((knownValue, result)))
 # run test
 if __name__ == '__main__':
     unittest.main()
